@@ -2,7 +2,7 @@
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
-from snowflake.snowpark.exceptions import SnowparkSQLException
+#from snowflake.snowpark.exceptions import SnowparkSQLException
 
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -41,12 +41,12 @@ if ingredients_list:
     time_to_insert = st.button('Submit order')
 
     if time_to_insert:
-        try:
-            session.sql(my_insert_stmt).collect()
-            st.success("Smoothie order saved successfully!")
-        except SnowparkSQLException as e:
-            st.error("There was an error saving your smoothie order. Please check your inputs.")
-            st.stop()
-            st.exception(e)
+        #try:
+        session.sql(my_insert_stmt).collect()
+            #st.success("Smoothie order saved successfully!")
+        #except SnowparkSQLException as e:
+            #st.error("There was an error saving your smoothie order. Please check your inputs.")
+            #st.stop()
+            #st.exception(e)
 
         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
