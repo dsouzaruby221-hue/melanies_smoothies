@@ -47,5 +47,6 @@ if ingredients_list:
         except SnowparkSQLException as e:
             st.error("There was an error saving your smoothie order. Please check your inputs.")
             st.stop()
+            st.exception(e)
 
         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
