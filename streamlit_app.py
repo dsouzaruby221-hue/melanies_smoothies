@@ -44,7 +44,7 @@ if ingredients_list:
         try:
             session.sql(my_insert_stmt).collect()
             st.success("Smoothie order saved successfully!")
-       except SnowparkSQLException as e:
+        except SnowparkSQLException as e:
             st.error("There was an error saving your smoothie order. Please check your inputs.")
             st.stop()
             st.exception(e)
