@@ -41,12 +41,16 @@ if ingredients_list:
     time_to_insert = st.button('Submit order')
 
     if time_to_insert:
-        #try:
         session.sql(my_insert_stmt).collect()
+        st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
+  
+    #if time_to_insert:
+        #try:
+        #session.sql(my_insert_stmt).collect()
             #st.success("Smoothie order saved successfully!")
         #except SnowparkSQLException as e:
             #st.error("There was an error saving your smoothie order. Please check your inputs.")
             #st.stop()
             #st.exception(e)
 
-        st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
+        #st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
