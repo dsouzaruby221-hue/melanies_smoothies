@@ -2,7 +2,6 @@
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
-#from snowflake.snowpark.exceptions import SnowparkSQLException
 
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -32,14 +31,9 @@ if ingredients_list:
 
     #st.write(ingredients_string)
 
-    #my_insert_stmt = f""" insert into smoothies.public.orders(ingredients, name_on_order)
-            #values ('""" + ingredients_string + """','"""+name_on_order+ """')"""
-    #my_insert_stmt = f""" INSERT INTO smoothies.public.orders (ingredients, name_on_order) VALUES ('{ingredients}', '{name_on_order}')"""
-    session.table("smoothie_orders").insert(
-    values=[(ingredients, name_on_order)],
-    columns=["ingredients", "name_on_order"]
-)
-    st.write(my_insert_stmt)
+    my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
+            values ('""" + ingredients_string + """','"""+name_on_order+ """')"""
+    #st.write(my_insert_stmt)
     #st.stop()
 
     time_to_insert = st.button('Submit order')
@@ -47,14 +41,3 @@ if ingredients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
-  
-    #if time_to_insert:
-        #try:
-        #session.sql(my_insert_stmt).collect()
-            #st.success("Smoothie order saved successfully!")
-        #except SnowparkSQLException as e:
-            #st.error("There was an error saving your smoothie order. Please check your inputs.")
-            #st.stop()
-            #st.exception(e)
-
-        #st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
